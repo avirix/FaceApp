@@ -3,9 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29409.12
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FaceDetector", "FaceDetector\FaceDetector.csproj", "{D4F16F09-226B-4DD5-975F-862548EAEAF7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FaceDetector", "FaceDetector\FaceDetector.csproj", "{D4F16F09-226B-4DD5-975F-862548EAEAF7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FaceDetector.Domain", "FaceDetector.Domain\FaceDetector.Domain.csproj", "{93E4B62E-0BEA-4AAD-B32F-24343BBFFA88}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FaceDetector.Domain", "FaceDetector.Domain\FaceDetector.Domain.csproj", "{93E4B62E-0BEA-4AAD-B32F-24343BBFFA88}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FaceDetector.Services", "FaceDetector.Services\FaceDetector.Services.csproj", "{2E18FAAA-EBB0-46CB-86A8-D5E4CCDFBBC4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FaceDetector.Abstractions", "FaceDetector.Abstractions\FaceDetector.Abstractions.csproj", "{993ACD42-B4A5-4BC3-8A80-8DEC56D1F313}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +25,14 @@ Global
 		{93E4B62E-0BEA-4AAD-B32F-24343BBFFA88}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{93E4B62E-0BEA-4AAD-B32F-24343BBFFA88}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{93E4B62E-0BEA-4AAD-B32F-24343BBFFA88}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2E18FAAA-EBB0-46CB-86A8-D5E4CCDFBBC4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2E18FAAA-EBB0-46CB-86A8-D5E4CCDFBBC4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2E18FAAA-EBB0-46CB-86A8-D5E4CCDFBBC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2E18FAAA-EBB0-46CB-86A8-D5E4CCDFBBC4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{993ACD42-B4A5-4BC3-8A80-8DEC56D1F313}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{993ACD42-B4A5-4BC3-8A80-8DEC56D1F313}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{993ACD42-B4A5-4BC3-8A80-8DEC56D1F313}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{993ACD42-B4A5-4BC3-8A80-8DEC56D1F313}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
