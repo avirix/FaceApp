@@ -22,7 +22,10 @@ namespace FaceDetector.Services.Services
             Configuration = configuration;
             FaceClient = new FaceClient(
                 new ApiKeyServiceClientCredentials(Configuration["FaceApi:faceKey"]),
-                new DelegatingHandler[] { });
+                new DelegatingHandler[] { })
+            {
+                Endpoint = Configuration["FaceApi:faceEndpoint"]
+            };
         }
 
         public async Task<IList<DetectedFace>> DetectFaces(string imageBase64)
@@ -38,8 +41,7 @@ namespace FaceDetector.Services.Services
             try
             {
                 var bytes = Convert.FromBase64String(imageBase64);
-                Image 
-                using (var stream = new MemoryStream(bytes))
+                using (var stream = new MemoryStream(bytes)) // File.OpenRead("photo1.jpg"))
                 {
                     IList<DetectedFace> faceList =
                         await FaceClient.Face.DetectWithStreamAsync(
@@ -47,8 +49,9 @@ namespace FaceDetector.Services.Services
                     return faceList;
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Console.WriteLine(ex.Message);
                 return new List<DetectedFace>();
             }
         }
