@@ -40,12 +40,12 @@ namespace FaceDetector.Services.Services
 
             try
             {
-                var bytes = Convert.FromBase64String(imageBase64);
+                var bytes = Convert.FromBase64String(imageBase64.Substring(imageBase64.LastIndexOf(',') + 1));
                 using (var stream = new MemoryStream(bytes)) // File.OpenRead("photo1.jpg"))
                 {
                     IList<DetectedFace> faceList =
                         await FaceClient.Face.DetectWithStreamAsync(
-                        stream, true, false, faceAttributes);
+                        stream, true, true, faceAttributes);
                     return faceList;
                 }
             }
