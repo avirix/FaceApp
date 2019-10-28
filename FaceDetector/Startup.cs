@@ -1,4 +1,5 @@
 using FaceDetector.Abstractions.Services;
+using FaceDetector.Middlewares;
 using FaceDetector.Services.Services;
 
 using Microsoft.AspNetCore.Builder;
@@ -38,6 +39,9 @@ namespace FaceDetector
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseApiResponse();
+
 
             app.UseEndpoints(endpoints =>
             {

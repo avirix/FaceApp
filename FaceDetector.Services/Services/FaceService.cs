@@ -20,11 +20,12 @@ namespace FaceDetector.Services.Services
         public FaceService(IConfiguration configuration)
         {
             Configuration = configuration;
+            var faceApiConfig = configuration.GetSection("FaceApi");
             FaceClient = new FaceClient(
-                new ApiKeyServiceClientCredentials(Configuration["FaceApi:faceKey"]),
+                new ApiKeyServiceClientCredentials(faceApiConfig["faceKey"]),
                 new DelegatingHandler[] { })
             {
-                Endpoint = Configuration["FaceApi:faceEndpoint"]
+                Endpoint = faceApiConfig["faceEndpoint"]
             };
         }
 
