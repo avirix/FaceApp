@@ -7,9 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FaceDetector", "FaceDetecto
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FaceDetector.Domain", "FaceDetector.Domain\FaceDetector.Domain.csproj", "{93E4B62E-0BEA-4AAD-B32F-24343BBFFA88}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FaceDetector.Services", "FaceDetector.Services\FaceDetector.Services.csproj", "{2E18FAAA-EBB0-46CB-86A8-D5E4CCDFBBC4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FaceDetector.Services", "FaceDetector.Services\FaceDetector.Services.csproj", "{2E18FAAA-EBB0-46CB-86A8-D5E4CCDFBBC4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FaceDetector.Abstractions", "FaceDetector.Abstractions\FaceDetector.Abstractions.csproj", "{993ACD42-B4A5-4BC3-8A80-8DEC56D1F313}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FaceDetector.Abstractions", "FaceDetector.Abstractions\FaceDetector.Abstractions.csproj", "{993ACD42-B4A5-4BC3-8A80-8DEC56D1F313}"
 EndProject
 Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "faceappclient", "faceappclient\", "{6310746E-DC6D-4901-AD6C-0FE5C0AD7D44}"
 	ProjectSection(WebsiteProperties) = preProject
@@ -55,7 +55,6 @@ Global
 		{993ACD42-B4A5-4BC3-8A80-8DEC56D1F313}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{993ACD42-B4A5-4BC3-8A80-8DEC56D1F313}.Release|Any CPU.Build.0 = Release|Any CPU
 		{6310746E-DC6D-4901-AD6C-0FE5C0AD7D44}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6310746E-DC6D-4901-AD6C-0FE5C0AD7D44}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6310746E-DC6D-4901-AD6C-0FE5C0AD7D44}.Release|Any CPU.ActiveCfg = Debug|Any CPU
 		{6310746E-DC6D-4901-AD6C-0FE5C0AD7D44}.Release|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
