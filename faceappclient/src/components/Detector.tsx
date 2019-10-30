@@ -1,8 +1,12 @@
 import React from 'react';
-import axios from 'axios';
+import ImageUpload from './face/ImageUpload';
 
-class Detector extends React.Component<any>{
-    
+class Detector extends React.Component<{}>{
+    render = () =>
+        <div>
+            Detector component
+            <ImageUpload />
+        </div>
 }
 
 export default Detector;
