@@ -47,7 +47,7 @@ class ImageUpload extends React.Component<{}, ImageUploadState>  {
         let { imagePreviewUrl, faceData } = this.state;
         let $imagePreview = null;
         if (imagePreviewUrl) {
-            $imagePreview = (<img src={imagePreviewUrl} alt="Uploaded image" />);
+            $imagePreview = (<img src={imagePreviewUrl} alt="Ready to analyzing!" />);
         } else {
             $imagePreview = (<div className="previewText">Please select an Image for Preview</div>);
         }

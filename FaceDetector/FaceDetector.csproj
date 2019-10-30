@@ -28,7 +28,7 @@
   </ItemGroup>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="cd ../faceappclient &amp;&amp; npm install &amp;&amp; cd ../faceappclient &amp;&amp; npm run build" />
+    <Exec Command="if $(ConfigurationName) == Release (cd ../faceappclient &amp;&amp; npm install &amp;&amp; cd ../faceappclient &amp;&amp; npm run build) ELSE (echo &quot;No build for Debug configuration&quot;)" />
   </Target>
 
 </Project>
