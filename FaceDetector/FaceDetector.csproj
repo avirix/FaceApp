@@ -27,4 +27,8 @@
     <ProjectReference Include="..\FaceDetector.Services\FaceDetector.Services.csproj" />
   </ItemGroup>
 
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="cd ../faceappclient &amp;&amp; npm run build" />
+  </Target>
+
 </Project>
