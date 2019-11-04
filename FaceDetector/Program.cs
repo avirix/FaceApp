@@ -1,11 +1,5 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 
 namespace FaceDetector
 {
@@ -21,8 +15,12 @@ namespace FaceDetector
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder
+#if DEBUG
                         .UseStartup<Startup>()
-                        .UseUrls("http://localhost:5500");
+                        .UseUrls("http://192.168.0.103:5500");
+#else
+                        .UseStartup<Startup>();
+#endif
                 });
     }
 }

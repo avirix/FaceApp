@@ -4,6 +4,7 @@ using FaceDetector.Services.Services;
 
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -23,7 +24,15 @@ namespace FaceDetector
         {
             services.AddTransient<IFaceService, FaceService>();
 
-            services.AddControllers();
+            services.AddCors(o => o.AddPolicy("AllowAllPolicy", b =>
+            {
+                b.AllowAnyOrigin()
+                 .AllowAnyMethod()
+                 .AllowAnyHeader();
+            }));
+
+            services.AddControllers(options => { options.AllowEmptyInputInBodyModelBinding = true; })
+                .SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -32,7 +41,9 @@ namespace FaceDetector
             {
                 app.UseDeveloperExceptionPage();
             }
-            
+
+            app.UseApiResponse();
+
             app.UseDefaultFiles();
             app.UseStaticFiles();
 
@@ -40,7 +51,7 @@ namespace FaceDetector
 
             app.UseAuthorization();
 
-            app.UseApiResponse();
+            app.UseCors("AllowAllPolicy");
 
 
             app.UseEndpoints(endpoints =>

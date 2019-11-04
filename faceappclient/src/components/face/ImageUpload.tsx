@@ -1,30 +1,30 @@
 import React from 'react';
 import ImageInfo from './ImageInfo';
+import axios from 'axios';
+import FaceDetail from './analyzer/FaceDetail';
+import { FaceModel } from './analyzer/FaceModel';
 
 interface ImageUploadState {
     file: string,
     imagePreviewUrl: string,
-    faceData: any
+    faceData: FaceModel[]
 }
 
 class ImageUpload extends React.Component<{}, ImageUploadState>  {
     state = {
         file: '',
         imagePreviewUrl: '',
-        faceData: {}
+        faceData: [] as FaceModel[]
     };
 
     onImageSubmit(e: any) {
         e.preventDefault();
-        fetch(
-            new Request("localhost:5500", {
-                method: "POST",
-                body: JSON.stringify({ data: this.state.imagePreviewUrl })
-            })
-        ).then(
-            (data) => this.setState({ faceData: data }),
-            (e) => alert('Exception in request'));
-        console.log('handle uploading-', this.state.file);
+        axios.post('http://192.168.0.103:5500/api/face', { image: this.state.imagePreviewUrl })
+            .then((response) => {
+                let data = response.data;
+                console.log(data);
+                this.setState({ faceData: data.Data });
+            });
     }
 
     onImageChange(e: any) {
@@ -52,6 +52,8 @@ class ImageUpload extends React.Component<{}, ImageUploadState>  {
             $imagePreview = (<div className="previewText">Please select an Image for Preview</div>);
         }
 
+        let imageInfoData: string = faceData ? "" + faceData : imagePreviewUrl;
+        console.log(imageInfoData);
         return (
             <div className="previewComponent">
                 <form onSubmit={(e) => this.onImageSubmit(e)}>
@@ -63,9 +65,9 @@ class ImageUpload extends React.Component<{}, ImageUploadState>  {
                         onClick={(e) => this.onImageSubmit(e)}>Upload Image</button>
                 </form>
                 <div className="imgPreview">
-                    {$imagePreview}
+                    <FaceDetail list={this.state.faceData} imagePreview={imagePreviewUrl}></FaceDetail>
                 </div>
-                <ImageInfo data={faceData? faceData as string : imagePreviewUrl} />
+                <ImageInfo data={this.state.faceData} />
             </div>
         )
     }
