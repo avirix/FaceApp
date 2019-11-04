@@ -1,6 +1,6 @@
 ﻿namespace FaceDetector.Abstractions.Entities
 {
-    public interface IBaseUser : ICommonModel<int>
+    public abstract class BaseUser : CommonModel<int>
     {
     }
 }

@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace FaceDetector.Abstractions.Entities
 {
-    public interface ICommonModel<T>
+    public abstract class CommonModel<T>
     {
         [Key]
         public T Id { get; set; }
@@ -12,11 +12,11 @@ namespace FaceDetector.Abstractions.Entities
         public DateTime Created { get; set; }
 
         [ForeignKey("CreatedId")]
-        public IBaseUser CreatedBy { get; set; }
+        public BaseUser CreatedBy { get; set; }
 
         public DateTime LastUpdated { get; set; }
 
         [ForeignKey("UpdatedId")]
-        public IBaseUser LastUpdatedBy { get; set; }
+        public BaseUser LastUpdatedBy { get; set; }
     }
 }
