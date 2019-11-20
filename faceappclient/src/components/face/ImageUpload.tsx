@@ -20,9 +20,9 @@ class ImageUpload extends React.Component<{}, ImageUploadState>  {
     onImageSubmit(e: any) {
         e.preventDefault();
         var config = {
-            headers: {'Access-Control-Allow-Origin': '*'}
+            headers: { 'Access-Control-Allow-Origin': '*' }
         };
-        axios.post('http://192.168.0.103:5500/api/face', { image: this.state.imagePreviewUrl }, config)
+        axios.post(`${window.location.origin}/api/face`, { image: this.state.imagePreviewUrl }, config)
             .then((response) => {
                 let data = response.data;
                 console.log(data);
@@ -47,6 +47,8 @@ class ImageUpload extends React.Component<{}, ImageUploadState>  {
     }
 
     render() {
+        console.log(window.location.origin);
+
         let { imagePreviewUrl, faceData } = this.state;
 
         let imageInfoData: string = faceData ? "" + faceData : imagePreviewUrl;
@@ -60,10 +62,10 @@ class ImageUpload extends React.Component<{}, ImageUploadState>  {
                     <button className="submitButton float-right btn btn-success"
                         type="submit"
                         onClick={(e) => this.onImageSubmit(e)}>Upload Image</button>
-                    <div className="imgPreview">
-                        <FaceDetail list={this.state.faceData} imagePreview={imagePreviewUrl}></FaceDetail>
-                    </div>
                 </form>
+                <div className="imgPreview">
+                    <FaceDetail list={this.state.faceData} imagePreview={imagePreviewUrl}></FaceDetail>
+                </div>
                 <ImageInfo data={this.state.faceData} />
             </div>
         )
