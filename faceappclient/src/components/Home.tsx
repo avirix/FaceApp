@@ -1,6 +1,6 @@
 import React from 'react';
 
-class Home extends React.Component<{}>{
+export class Home extends React.Component<{}>{
     render = () =>
         <div>
             <div className="jumbotron">
@@ -12,5 +12,3 @@ class Home extends React.Component<{}>{
             </div>
         </div>
 }
-
-export default Home;

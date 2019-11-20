@@ -6,7 +6,7 @@ interface FaceModelList {
     imagePreview: string
 }
 
-class FaceDetail extends React.Component<FaceModelList>  {
+export class FaceDetail extends React.Component<FaceModelList>  {
     render() {
         return (
             <div style={{ position: "relative" }}>
@@ -29,5 +29,3 @@ class FaceDetail extends React.Component<FaceModelList>  {
         )
     }
 }
-
-export default FaceDetail;

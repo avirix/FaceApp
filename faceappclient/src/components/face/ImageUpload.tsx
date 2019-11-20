@@ -1,7 +1,7 @@
 import React from 'react';
-import ImageInfo from './ImageInfo';
 import axios from 'axios';
-import FaceDetail from './analyzer/FaceDetail';
+import { ImageInfo } from './ImageInfo';
+import { FaceDetail } from './analyzer/FaceDetail';
 import { FaceModel } from './analyzer/FaceModel';
 
 interface ImageUploadState {
@@ -10,7 +10,7 @@ interface ImageUploadState {
     faceData: FaceModel[]
 }
 
-class ImageUpload extends React.Component<{}, ImageUploadState>  {
+export class ImageUpload extends React.Component<{}, ImageUploadState>  {
     state = {
         file: '',
         imagePreviewUrl: '',
@@ -47,15 +47,13 @@ class ImageUpload extends React.Component<{}, ImageUploadState>  {
     }
 
     render() {
-        console.log(window.location.origin);
-
-        let { imagePreviewUrl, faceData } = this.state;
-
-        let imageInfoData: string = faceData ? "" + faceData : imagePreviewUrl;
-        console.log(imageInfoData);
+        const { imagePreviewUrl } = this.state;
         return (
             <div className="previewComponent" >
-                <form onSubmit={(e) => this.onImageSubmit(e)} style={{ width: '50%', margin: "15px auto", position: "relative" }}>
+                <form
+                    onSubmit={(e) => this.onImageSubmit(e)}
+                    style={{ width: '50%', margin: "15px auto", position: "relative" }}
+                >
                     <input className="fileInput"
                         type="file"
                         onChange={(e) => this.onImageChange(e)} />
@@ -64,12 +62,13 @@ class ImageUpload extends React.Component<{}, ImageUploadState>  {
                         onClick={(e) => this.onImageSubmit(e)}>Upload Image</button>
                 </form>
                 <div className="imgPreview">
-                    <FaceDetail list={this.state.faceData} imagePreview={imagePreviewUrl}></FaceDetail>
+                    <FaceDetail
+                        list={this.state.faceData}
+                        imagePreview={imagePreviewUrl}
+                    />
                 </div>
                 <ImageInfo data={this.state.faceData} />
             </div>
         )
     }
 }
-
-export default ImageUpload;
