@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Models\Entities\" />
+    <ProjectReference Include="..\FaceDetector.Abstractions\FaceDetector.Abstractions.csproj" />
   </ItemGroup>
 
 </Project>

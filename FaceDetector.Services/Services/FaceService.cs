@@ -42,7 +42,7 @@ namespace FaceDetector.Services.Services
             try
             {
                 var bytes = Convert.FromBase64String(imageBase64.Substring(imageBase64.LastIndexOf(',') + 1));
-                using (var stream = new MemoryStream(bytes)) // File.OpenRead("photo1.jpg"))
+                using (var stream = new MemoryStream(bytes))
                 {
                     IList<DetectedFace> faceList =
                         await FaceClient.Face.DetectWithStreamAsync(

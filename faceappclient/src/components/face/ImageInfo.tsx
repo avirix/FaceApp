@@ -1,15 +1,13 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 
 interface ImageInfoProps {
-    data: string
+    data: any,
 }
 
-const ImageInfo: FunctionComponent<ImageInfoProps> = (props) => {
+export const ImageInfo: React.FC<ImageInfoProps> = (props) => {
     return (
         <div>
-            <p className="text-break">{props.data}</p>
+            <p>{JSON.stringify(props.data)}</p>
         </div>
     );
 }
-
-export default ImageInfo;

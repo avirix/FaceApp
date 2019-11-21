@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const Header: React.FC = () => {
+export const Header: React.FC = () => {
     return (
         <div className="collapse navbar-collapse">
             <ul className="navbar-nav mr-auto">
@@ -15,5 +15,3 @@ const Header: React.FC = () => {
         </div>
     );
 }
-
-export default Header;
