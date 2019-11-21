@@ -16,8 +16,8 @@ namespace FaceDetector
                 {
                     webBuilder
 #if DEBUG
-                        .UseStartup<Startup>();
-                    // .UseUrls("http://192.168.0.103:5500");
+                        .UseStartup<Startup>()
+                        .UseUrls("http://192.168.0.103:5500");
 #else
                         .UseStartup<Startup>();
 #endif
