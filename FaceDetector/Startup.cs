@@ -42,17 +42,16 @@ namespace FaceDetector
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseApiResponse();
-
             app.UseDefaultFiles();
             app.UseStaticFiles();
 
             app.UseRouting();
 
-            app.UseAuthorization();
-
             app.UseCors("AllowAllPolicy");
 
+            app.UseApiResponse();
+
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
