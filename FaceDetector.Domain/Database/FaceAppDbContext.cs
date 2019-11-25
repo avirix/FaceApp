@@ -1,5 +1,7 @@
 ﻿using System.Diagnostics.CodeAnalysis;
+
 using FaceDetector.Domain.Models.Entities;
+
 using Microsoft.EntityFrameworkCore;
 
 namespace FaceDetector.Domain.Database
@@ -14,7 +16,7 @@ namespace FaceDetector.Domain.Database
         {
         }
 
-        protected FaceAppDbContext()
+        public FaceAppDbContext() : base()
         {
         }
     }
