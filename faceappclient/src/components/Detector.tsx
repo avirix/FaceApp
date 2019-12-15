@@ -3,7 +3,7 @@ import { ImageUpload } from './face/ImageUpload';
 
 export class Detector extends React.Component<{}>{
     render = () =>
-        <div>
+        <div className = "jumbotron">
             <ImageUpload />
         </div>
 }

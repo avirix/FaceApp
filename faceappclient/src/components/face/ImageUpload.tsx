@@ -50,6 +50,9 @@ export class ImageUpload extends React.Component<{}, ImageUploadState>  {
         const { imagePreviewUrl } = this.state;
         return (
             <div className="previewComponent" >
+                <div className="row text-center">
+                    <h2>Please, select your image for analyze</h2>
+                </div>
                 <form
                     onSubmit={(e) => this.onImageSubmit(e)}
                     style={{ width: '50%', margin: "15px auto", position: "relative" }}
@@ -67,7 +70,7 @@ export class ImageUpload extends React.Component<{}, ImageUploadState>  {
                         imagePreview={imagePreviewUrl}
                     />
                 </div>
-                <ImageInfo data={this.state.faceData} />
+                <ImageInfo data={this.state.faceData && undefined} />
             </div>
         )
     }
