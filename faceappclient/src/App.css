@@ -1,5 +1,8 @@
+@import url('https://fonts.googleapis.com/css?family=Audiowide|Bebas+Neue&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Muli&display=swap');
 .App {
   text-align: center;
+  background: #ddd;
 }
 
 .App-logo {
@@ -19,4 +22,45 @@
 
 .App-link {
   color: #09d3ac;
+}
+
+.navbar {
+  background-color: rgba(33, 37, 41, 0.72);
+  margin-bottom: 30px;
+  font-family: 'Audiowide', cursive;
+
+}
+.navbar > .logo {
+  width: 48px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.navbar .navbar-brand {
+  color: #fff;
+  font-size: -webkit-xxx-large;
+}
+
+.navbar .navbar-brand > span {
+  color: #007bff;
+}
+
+.container {
+  font-family: 'Muli', sans-serif;
+}
+
+.form-inline .form-control {
+  border: none;
+  border-radius: 2px;
+  background-color: rgba(33, 37, 41, 0.72);
+}
+
+body {
+  background-image: url('./resources/img/bg.png');
+  background-repeat: no-repeat;
+  background-size: inherit;
+}
+
+.jumbotron {
+  background-color: #595c5f6b;
 }
