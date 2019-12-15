@@ -1,5 +1,5 @@
 import React from 'react';
-import { Header } from './components/Header';
+import  Header  from './components/Header';
 import { Switch, Route } from 'react-router';
 import { Detector } from './components/Detector';
 import { Login } from './components/Login';
@@ -13,11 +13,8 @@ export const App: React.FC = () => {
   return (
     <div className="background">
       <header className="navbar navbar-expand-lg navbar-dark">
-        <img src={icon} className="logo" alt="app logo"/>
+          <a className="logo" href="/"><img src={icon} className="logo" alt="app logo"/></a>
         <a className="navbar-brand" href="/">Face<span>App</span></a>
-        <button className="navbar-toggler collapsed" type="button">
-          <span className="navbar-toggler-icon"></span>
-        </button>
         <Header />
       </header>
       <div className="container">
