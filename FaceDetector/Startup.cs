@@ -1,6 +1,9 @@
 using AutoMapper;
+
+using FaceDetector.Abstractions.Repositories;
 using FaceDetector.Abstractions.Services;
 using FaceDetector.Domain.Database;
+using FaceDetector.Domain.Database.Repositories;
 using FaceDetector.Mappings;
 using FaceDetector.Middlewares;
 using FaceDetector.Services.Services;
@@ -27,19 +30,20 @@ namespace FaceDetector
 
         public void ConfigureServices(IServiceCollection services)
         {
+            string connection = Configuration.GetConnectionString("SQLAzureConnectionString");
+            if (connection.Contains("#")) 
+                connection = Configuration.GetConnectionString("SQLLocalConnectionString");
+
             // initialize db context
-            services.AddDbContext<FaceAppDbContext>(options =>
-#if DEBUG
-                options.UseSqlServer(Configuration.GetConnectionString("SQLLocalConnectionString"))
-#else
-                options.UseSqlServer(Configuration.GetConnectionString("SQLAzureConnectionString"))
-#endif
-            );
+            services.AddDbContext<FaceAppDbContext>(options => options.UseSqlServer(connection));
 
             // add services to DI
             services.AddAutoMapper(typeof(MapperProfile));
             services.AddTransient<IFaceService, FaceService>();
             services.AddTransient<IUserService, UserService>();
+            services.AddTransient<IGalleryService, GalleryService>();
+
+            services.AddTransient<IUserRepository, UserRepository>();
 
             services.AddSwaggerGen(options =>
             {

@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using AutoMapper;
+
 using Dtos;
-using FaceDetector.Domain.Models.Entities;
-using AutoMapper;
+
+using FaceDetector.Abstractions.Entities;
 
 namespace FaceDetector.Mappings
 {
@@ -12,7 +10,7 @@ namespace FaceDetector.Mappings
     {
         public MapperProfile()
         {
-            CreateMap<UserDto, User>().ReverseMap();
+            CreateMap<UserDto, BaseUser>().ReverseMap();
         }
     }
 }
