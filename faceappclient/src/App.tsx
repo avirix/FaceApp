@@ -13,7 +13,7 @@ export const App: React.FC = () => {
   return (
     <div className="background">
       <header className="navbar navbar-expand-lg navbar-dark">
-        <img src={icon} className="logo"/>
+        <img src={icon} className="logo" alt="app logo"/>
         <a className="navbar-brand" href="/">Face<span>App</span></a>
         <button className="navbar-toggler collapsed" type="button">
           <span className="navbar-toggler-icon"></span>
