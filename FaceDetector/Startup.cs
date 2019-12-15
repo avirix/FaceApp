@@ -1,5 +1,7 @@
+using AutoMapper;
 using FaceDetector.Abstractions.Services;
 using FaceDetector.Domain.Database;
+using FaceDetector.Mappings;
 using FaceDetector.Middlewares;
 using FaceDetector.Services.Services;
 
@@ -11,7 +13,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
-using Swashbuckle.AspNetCore.Swagger;
 
 namespace FaceDetector
 {
@@ -36,7 +37,9 @@ namespace FaceDetector
             );
 
             // add services to DI
+            services.AddAutoMapper(typeof(MapperProfile));
             services.AddTransient<IFaceService, FaceService>();
+            services.AddTransient<IUserService, UserService>();
 
             services.AddSwaggerGen(options =>
             {
