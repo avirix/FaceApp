@@ -1,21 +1,20 @@
 import React, {Fragment} from 'react';
 import {Link, NavLink} from 'react-router-dom';
 
-interface HeaderElements {
-    isShow : boolean
+interface HeaderElementsState {
+    isShow: boolean
 }
 
-export default class Header extends React.Component<{}, HeaderElements> {
-
+export class Header extends React.Component<{}, HeaderElementsState> {
     state = {
-        isShow: false
+        isShow: false,
     };
 
-    showHeader = () => {
+    showHeader(e: any) {
         if (this.state.isShow) {
-            this.setState({isShow : false});
-        }else {
-            this.setState({isShow : true});
+            this.setState({isShow: false});
+        } else {
+            this.setState({isShow: true});
         }
     };
 
@@ -26,7 +25,7 @@ export default class Header extends React.Component<{}, HeaderElements> {
                 <button className="navbar-toggler collapsed" type="button" onClick={this.showHeader}>
                     <span className="navbar-toggler-icon"> </span>
                 </button>
-                <div className={isShow ? 'collapse navbar-collapse show' : 'collapse navbar-collapse'} id="navbarsExample10">
+                <div className={isShow ? 'collapse navbar-collapse show' : 'collapse navbar-collapse'}>
                     <ul className="navbar-nav mr-auto">
                         <li className="nav-item"><NavLink className="nav-link" to='/detector'>Detector</NavLink></li>
                     </ul>
