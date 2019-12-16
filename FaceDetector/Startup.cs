@@ -73,14 +73,14 @@ namespace FaceDetector
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+            }
 
-                // apply automigrations
-                // NOTE: context disposed in block below
-                // (not available in another part of method)
-                using (context)
-                {
-                    context.Database.Migrate();
-                }
+            // apply automigrations
+            // NOTE: context disposed in block below
+            // (not available in another part of method)
+            using (context)
+            {
+                context.Database.Migrate();
             }
 
             app.UseDefaultFiles();
