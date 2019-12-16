@@ -5,7 +5,7 @@ using FaceDetector.Abstractions.Services;
 
 namespace FaceDetector.Services.Services
 {
-    public class UserService : IUserService
+    public class GalleryService : IGalleryService
     {
     }
 }

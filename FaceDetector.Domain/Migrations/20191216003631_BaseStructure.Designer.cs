@@ -10,45 +10,54 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FaceDetector.Domain.Migrations
 {
     [DbContext(typeof(FaceAppDbContext))]
-    [Migration("20191125205630_Initial")]
-    partial class Initial
+    [Migration("20191216003631_BaseStructure")]
+    partial class BaseStructure
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.0.1")
+                .HasAnnotation("ProductVersion", "3.1.0")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("FaceDetector.Abstractions.Entities.BaseUser", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("Created")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("CreatedId")
-                        .HasColumnType("int");
+                    b.Property<Guid?>("CreatedId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Discriminator")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime>("LastUpdated")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("UpdatedId")
-                        .HasColumnType("int");
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PasswordSalt")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid?>("UpdatedId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Username")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CreatedId")
-                        .IsUnique()
-                        .HasFilter("[CreatedId] IS NOT NULL");
+                    b.HasIndex("CreatedId");
 
                     b.HasIndex("UpdatedId");
 
@@ -69,8 +78,8 @@ namespace FaceDetector.Domain.Migrations
                     b.Property<DateTime>("Created")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("CreatedId")
-                        .HasColumnType("int");
+                    b.Property<Guid?>("CreatedId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("FileExtension")
                         .HasColumnType("nvarchar(max)");
@@ -90,8 +99,8 @@ namespace FaceDetector.Domain.Migrations
                     b.Property<int?>("PictureWidth")
                         .HasColumnType("int");
 
-                    b.Property<int?>("UpdatedId")
-                        .HasColumnType("int");
+                    b.Property<Guid?>("UpdatedId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
@@ -106,26 +115,14 @@ namespace FaceDetector.Domain.Migrations
                 {
                     b.HasBaseType("FaceDetector.Abstractions.Entities.BaseUser");
 
-                    b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PasswordHash")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PasswordSalt")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Username")
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasDiscriminator().HasValue("User");
                 });
 
             modelBuilder.Entity("FaceDetector.Abstractions.Entities.BaseUser", b =>
                 {
                     b.HasOne("FaceDetector.Abstractions.Entities.BaseUser", "CreatedBy")
-                        .WithOne()
-                        .HasForeignKey("FaceDetector.Abstractions.Entities.BaseUser", "CreatedId");
+                        .WithMany()
+                        .HasForeignKey("CreatedId");
 
                     b.HasOne("FaceDetector.Abstractions.Entities.BaseUser", "LastUpdatedBy")
                         .WithMany()

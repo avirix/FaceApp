@@ -1,7 +1,7 @@
-﻿using System.Diagnostics.CodeAnalysis;
-
+﻿
+using System.Diagnostics.CodeAnalysis;
 using FaceDetector.Domain.Models.Entities;
-
+using JetBrains.Annotations;
 using Microsoft.EntityFrameworkCore;
 
 namespace FaceDetector.Domain.Database
@@ -11,12 +11,11 @@ namespace FaceDetector.Domain.Database
         public DbSet<User> Users { get; set; }
         public DbSet<FaceAppImage> Faces { get; set; }
 
-
-        public FaceAppDbContext([NotNull] DbContextOptions options) : base(options)
+        public FaceAppDbContext()
         {
         }
 
-        public FaceAppDbContext() : base()
+        public FaceAppDbContext(DbContextOptions<FaceAppDbContext> options) : base(options)
         {
         }
     }
