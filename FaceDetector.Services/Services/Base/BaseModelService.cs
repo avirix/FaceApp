@@ -11,7 +11,7 @@ using FaceDetector.Domain.Models.Common;
 
 namespace FaceDetector.Services.Services
 {
-    public abstract class BaseModelService<T, TDto> : IBaseModelService<T, TDto> where T : CommonModel<Guid>
+    public class BaseModelService<T, TDto> : IBaseModelService<T, TDto> where T : CommonModel<Guid>
     {
         public IMapper Mapper { get; }
         public IBaseRepository<T> Repository { get; }

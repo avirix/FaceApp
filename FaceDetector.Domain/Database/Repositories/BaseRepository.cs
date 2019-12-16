@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FaceDetector.Domain.Database.Repositories
 {
-    public abstract class BaseRepository<T> : IBaseRepository<T> where T : CommonModel<Guid>
+    public class BaseRepository<T> : IBaseRepository<T> where T : CommonModel<Guid>
     {
         private readonly FaceAppDbContext dbContext;
         protected readonly DbSet<T> dbSet;

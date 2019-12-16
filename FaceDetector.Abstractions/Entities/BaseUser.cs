@@ -2,7 +2,7 @@
 
 namespace FaceDetector.Abstractions.Entities
 {
-    public abstract class BaseUser : CommonModel<Guid>
+    public class BaseUser : CommonModel<Guid>
     {
         public string Username { get; set; }
         public string Email { get; set; }

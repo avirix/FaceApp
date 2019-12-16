@@ -10,6 +10,7 @@ using FaceDetector.Services.Services;
 
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -30,19 +31,24 @@ namespace FaceDetector
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
             string connection = Configuration.GetConnectionString("SQLAzureConnectionString");
-            if (connection.Contains("#")) 
+            if (connection.Contains("#"))
                 connection = Configuration.GetConnectionString("SQLLocalConnectionString");
 
             // initialize db context
-            services.AddDbContext<FaceAppDbContext>(options => options.UseSqlServer(connection));
+            services.AddDbContext<FaceAppDbContext>(options => options.UseSqlServer(connection, action => action.MigrationsAssembly("FaceDetector.Domain")));
 
             // add services to DI
             services.AddAutoMapper(typeof(MapperProfile));
+
+            services.AddTransient(typeof(IBaseModelService<,>), typeof(BaseModelService<,>));
             services.AddTransient<IFaceService, FaceService>();
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<IGalleryService, GalleryService>();
 
+            services.AddTransient(typeof(IBaseRepository<>), typeof(BaseRepository<>));
             services.AddTransient<IUserRepository, UserRepository>();
 
             services.AddSwaggerGen(options =>

@@ -1,10 +1,9 @@
 ﻿using System;
-
 using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace FaceDetector.Domain.Migrations
 {
-    public partial class Initial : Migration
+    public partial class BaseStructure : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -12,17 +11,16 @@ namespace FaceDetector.Domain.Migrations
                 name: "BaseUser",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<Guid>(nullable: false),
                     Created = table.Column<DateTime>(nullable: false),
-                    CreatedId = table.Column<int>(nullable: false),
+                    CreatedId = table.Column<Guid>(nullable: true),
                     LastUpdated = table.Column<DateTime>(nullable: false),
-                    UpdatedId = table.Column<int>(nullable: false),
-                    Discriminator = table.Column<string>(nullable: false),
+                    UpdatedId = table.Column<Guid>(nullable: true),
                     Username = table.Column<string>(nullable: true),
                     Email = table.Column<string>(nullable: true),
                     PasswordHash = table.Column<string>(nullable: true),
-                    PasswordSalt = table.Column<string>(nullable: true)
+                    PasswordSalt = table.Column<string>(nullable: true),
+                    Discriminator = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -46,13 +44,13 @@ namespace FaceDetector.Domain.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
-                    Created = table.Column<DateTime>(nullable: true),
-                    CreatedId = table.Column<int>(nullable: true),
-                    LastUpdated = table.Column<DateTime>(nullable: true),
-                    UpdatedId = table.Column<int>(nullable: true),
-                    FileExtension = table.Column<string>(nullable: false),
-                    ImageBase64 = table.Column<string>(nullable: false),
-                    ImageBase64Length = table.Column<int>(nullable: true),
+                    Created = table.Column<DateTime>(nullable: false),
+                    CreatedId = table.Column<Guid>(nullable: true),
+                    LastUpdated = table.Column<DateTime>(nullable: false),
+                    UpdatedId = table.Column<Guid>(nullable: true),
+                    FileExtension = table.Column<string>(nullable: true),
+                    ImageBase64 = table.Column<string>(nullable: true),
+                    ImageBase64Length = table.Column<int>(nullable: false),
                     PictureWidth = table.Column<int>(nullable: true),
                     PictureHeight = table.Column<int>(nullable: true),
                     AnalyzeResult = table.Column<string>(nullable: true)
@@ -77,9 +75,7 @@ namespace FaceDetector.Domain.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_BaseUser_CreatedId",
                 table: "BaseUser",
-                column: "CreatedId",
-                unique: true,
-                filter: "[CreatedId] IS NOT NULL");
+                column: "CreatedId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_BaseUser_UpdatedId",

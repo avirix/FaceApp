@@ -1,53 +1,43 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
 using System.Security.Claims;
 using System.Text;
-
-using AutoMapper;
 
 using Dtos;
 
 using FaceDetector.Abstractions.Entities;
-using FaceDetector.Abstractions.Repositories;
-using FaceDetector.Abstractions.Services;
 using FaceDetector.Domain.Models.Common;
-using FaceDetector.Domain.Models.Entities;
 using FaceDetector.Services.Helpers;
 
-using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 
 namespace FaceDetector.Services.Services
 {
-    public class UserService : BaseModelService<BaseUser, UserDto>, IUserService
+    public partial class UserService
     {
-        readonly IConfiguration _configuration;
-
-        public UserService(IMapper mapper, IConfiguration configuration, IUserRepository userRepository) : base(mapper, userRepository)
-        {
-            _configuration = configuration;
-        }
-
         public string Authenticate(BaseUser user, string password)
         {
-            throw new NotImplementedException();
+            if (!PasswordHelper.VerifyPasswordHash(password, user.PasswordHash, user.PasswordSalt))
+                throw new FaceAppException("Wrong email or password");
+            return GetJwtToken(user);
         }
 
         public string GetJwtToken(BaseUser user)
         {
-            throw new NotImplementedException();
+            return GenerateToken(GetIdentity(user).Claims);
         }
 
         public BaseUser GetUser(UserDto dto)
         {
-            throw new NotImplementedException();
+            return Repository.GetAll().FirstOrDefault(x => x.Email == dto.Email);
         }
 
         public BaseUser Register(UserDto userDto)
         {
             if (GetUser(userDto) != null) throw new FaceAppException("User with this email already registered");
-            User user = Mapper.Map<UserDto, User>(userDto);
+            BaseUser user = ToModel(userDto);
             user.Id = Guid.NewGuid();
             user.PasswordSalt = PasswordHelper.CreateSalt();
             user.PasswordHash = PasswordHelper.CreatePasswordHash(userDto.Password, user.PasswordSalt);
@@ -69,7 +59,7 @@ namespace FaceDetector.Services.Services
             return new JwtSecurityTokenHandler().WriteToken(jwt);
         }
 
-        private ClaimsIdentity GetIdentity(User user)
+        private ClaimsIdentity GetIdentity(BaseUser user)
         {
             var claims = new List<Claim>
             {

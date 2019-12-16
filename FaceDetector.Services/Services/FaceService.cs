@@ -12,14 +12,12 @@ using Microsoft.Extensions.Configuration;
 
 namespace FaceDetector.Services.Services
 {
-    public class FaceService : IFaceService
-    {
-        public IConfiguration Configuration { get; }
+    public class FaceService : IFaceService 
+    { 
         public IFaceClient FaceClient { get; set; }
 
         public FaceService(IConfiguration configuration)
         {
-            Configuration = configuration;
             var faceApiConfig = configuration.GetSection("FaceApi");
             FaceClient = new FaceClient(
                 new ApiKeyServiceClientCredentials(faceApiConfig["faceKey"]),
