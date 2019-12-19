@@ -4,9 +4,13 @@ using FaceDetector.Abstractions.Repositories;
 using FaceDetector.Abstractions.Services;
 using FaceDetector.Domain.Database;
 using FaceDetector.Domain.Database.Repositories;
+using FaceDetector.Domain.Database.Repositories.Abstract;
+using FaceDetector.Domain.Database.Repositories.Concrete;
 using FaceDetector.Mappings;
 using FaceDetector.Middlewares;
+using FaceDetector.Services.Abstract;
 using FaceDetector.Services.Services;
+using FaceDetector.Services.Services.Abstract;
 
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -33,9 +37,7 @@ namespace FaceDetector
         {
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
-            string connection = Configuration.GetConnectionString("SQLAzureConnectionString");
-            if (connection.Contains("#"))
-                connection = Configuration.GetConnectionString("SQLLocalConnectionString");
+            string connection = Configuration.GetConnectionString("SQLLocalConnectionString");
 
             // initialize db context
             services.AddDbContext<FaceAppDbContext>(options => options.UseSqlServer(connection, action => action.MigrationsAssembly("FaceDetector.Domain")));
@@ -43,13 +45,21 @@ namespace FaceDetector
             // add services to DI
             services.AddAutoMapper(typeof(MapperProfile));
 
+            services.AddTransient(typeof(IBaseRepository<>), typeof(BaseRepository<>));
+            services.AddTransient<IUserRepository, UserRepository>();
+            services.AddTransient<IFaceAppImageRepository, FaceAppImageRepository>();
+            services.AddTransient<IFaceDetectedRepository, FaceDetectedRepository>();
+            services.AddTransient<IGalleryRepository, GalleryRepository>();
+            services.AddTransient<IImageFolderRepository, ImageFolderRepository>();
+            services.AddTransient<IUserProfileRepository, UserProfileRepository>();
+
             services.AddTransient(typeof(IBaseModelService<,>), typeof(BaseModelService<,>));
             services.AddTransient<IFaceService, FaceService>();
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<IGalleryService, GalleryService>();
-
-            services.AddTransient(typeof(IBaseRepository<>), typeof(BaseRepository<>));
-            services.AddTransient<IUserRepository, UserRepository>();
+            services.AddTransient<IUserProfileService, UserProfileService>();
+            services.AddTransient<IImageFolderService, ImageFolderService>();
+            services.AddTransient<IFaceDetectedService, FaceDetectedService>();
 
             services.AddSwaggerGen(options =>
             {
@@ -73,15 +83,11 @@ namespace FaceDetector
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-            }
 
-            // apply automigrations
-            // NOTE: context disposed in block below
-            // (not available in another part of method)
-            using (context)
-            {
+                // TODO: create configs for autoupdate
                 context.Database.Migrate();
             }
+
 
             app.UseDefaultFiles();
             app.UseStaticFiles();

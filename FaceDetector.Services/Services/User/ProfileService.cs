@@ -1,11 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using AutoMapper;
+using AutoMapper.Configuration;
+
+using FaceDetector.Abstractions.Repositories;
+using FaceDetector.Domain.Models.Entities;
+using FaceDetector.Dtos;
+using FaceDetector.Services.Abstract;
 
 namespace FaceDetector.Services.Services
 {
-    public partial class UserService
+    public class UserProfileService : BaseModelService<UserProfile, UserProfileDto>, IUserProfileService
     {
 
+        public UserProfileService(IMapper mapper, IUserProfileRepository userProfileRepository)
+            : base(mapper, userProfileRepository)
+        {
+        }
     }
 }

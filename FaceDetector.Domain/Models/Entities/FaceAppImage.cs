@@ -3,8 +3,6 @@ using System.Collections.Generic;
 
 using FaceDetector.Abstractions.Entities;
 
-using Microsoft.Azure.CognitiveServices.Vision.Face.Models;
-
 using Newtonsoft.Json;
 
 namespace FaceDetector.Domain.Models.Entities
@@ -17,6 +15,8 @@ namespace FaceDetector.Domain.Models.Entities
         public int? PictureWidth { get; set; }
         public int? PictureHeight { get; set; }
         public string AnalyzeResult { get; set; }
+
+        public List<FaceDetected> DetectedFaces { get; set; }
 
         public FaceAppImage() { }
 
@@ -31,7 +31,7 @@ namespace FaceDetector.Domain.Models.Entities
             AnalyzeResult = result;
         }
 
-        public FaceAppImage(string imageBase64, IEnumerable<DetectedFace> result)
+        public FaceAppImage(string imageBase64, IEnumerable<Microsoft.Azure.CognitiveServices.Vision.Face.Models.DetectedFace> result)
             : this(imageBase64, JsonConvert.SerializeObject(result))
         { }
 

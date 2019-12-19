@@ -14,13 +14,8 @@ namespace FaceDetector
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    webBuilder
-#if DEBUG
-                        .UseStartup<Startup>()
-                        .UseUrls("http://192.168.0.103:5500");
-#else
-                        .UseStartup<Startup>();
-#endif
+                    webBuilder.UseStartup<Startup>();
+                        //.UseUrls("http://192.168.0.103:5500");
                 });
     }
 }

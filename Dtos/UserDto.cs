@@ -1,4 +1,4 @@
-﻿namespace Dtos
+﻿namespace FaceDetector.Dtos
 {
     public class UserDto
     {

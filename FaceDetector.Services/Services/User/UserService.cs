@@ -1,11 +1,10 @@
 ﻿
 using AutoMapper;
 
-using Dtos;
-
 using FaceDetector.Abstractions.Entities;
 using FaceDetector.Abstractions.Repositories;
 using FaceDetector.Abstractions.Services;
+using FaceDetector.Dtos;
 
 using Microsoft.Extensions.Configuration;
 
@@ -15,7 +14,8 @@ namespace FaceDetector.Services.Services
     {
         readonly IConfiguration _configuration;
 
-        public UserService(IMapper mapper, IConfiguration configuration, IUserRepository userRepository) : base(mapper, userRepository)
+        public UserService(IMapper mapper, IConfiguration configuration, IUserRepository userRepository)
+            : base(mapper, userRepository)
         {
             _configuration = configuration;
         }

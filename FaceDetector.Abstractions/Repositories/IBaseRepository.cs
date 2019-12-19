@@ -1,6 +1,5 @@
 ﻿using System;
-using System.Linq;
-using System.Linq.Expressions;
+using System.Collections.Generic;
 
 using FaceDetector.Abstractions.Entities;
 
@@ -10,9 +9,9 @@ namespace FaceDetector.Abstractions.Repositories
     {
         void Create(T item);
         T FindById(Guid id);
-        IQueryable<T> GetAll(bool noTracking = false);
-        IQueryable<T> GetAll(Expression<Func<T, bool>> predicate);
-        IQueryable<T> Get(Expression<Func<T, bool>> predicate);
+        IEnumerable<T> GetAll(bool noTracking = false);
+        IEnumerable<T> GetAll(Func<T, bool> predicate);
+        IEnumerable<T> Get(Func<T, bool> predicate);
         void Remove(T item);
         void Update(T item);
     }

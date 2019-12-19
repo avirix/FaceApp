@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 
@@ -20,17 +21,17 @@ namespace FaceDetector.Domain.Database.Repositories
             dbSet = this.dbContext.Set<T>();
         }
 
-        public virtual IQueryable<T> GetAll(bool noTracking = false)
+        public virtual IEnumerable<T> GetAll(bool noTracking = false)
         {
             return noTracking ? dbSet.AsNoTracking() : dbSet;
         }
 
-        public virtual IQueryable<T> GetAll(Expression<Func<T, bool>> predicate)
+        public virtual IEnumerable<T> GetAll(Func<T, bool> predicate)
         {
             return GetAll().Where(predicate);
         }
 
-        public virtual IQueryable<T> Get(Expression<Func<T, bool>> predicate)
+        public virtual IEnumerable<T> Get(Func<T, bool> predicate)
         {
             return GetAll().Where(predicate);
         }

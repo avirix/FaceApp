@@ -1,6 +1,6 @@
-﻿using Dtos;
-
+﻿
 using FaceDetector.Abstractions.Entities;
+using FaceDetector.Dtos;
 
 namespace FaceDetector.Abstractions.Services
 {

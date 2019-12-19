@@ -4,14 +4,16 @@ using FaceDetector.Domain.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace FaceDetector.Domain.Migrations
 {
     [DbContext(typeof(FaceAppDbContext))]
-    partial class FaceAppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20191218153708_AddFunctionality")]
+    partial class AddFunctionality
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

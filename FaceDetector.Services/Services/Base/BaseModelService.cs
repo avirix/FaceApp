@@ -62,12 +62,12 @@ namespace FaceDetector.Services.Services
 
         public virtual T Update(Guid id, TDto TDto)
         {
-            var entityT = Mapper.Map<TDto, T>(TDto);
-
             var T = Repository.FindById(id);
 
             if (T is null)
                 throw new FaceAppException($"{typeof(T).Name}, id: {id} don't found");
+
+            var entityT = Mapper.Map(TDto, T);
 
             Repository.Update(entityT);
 

@@ -2,24 +2,25 @@
 using System.Collections.Generic;
 using System.Linq;
 
-using Dtos;
 
 using FaceDetector.Abstractions.Services;
+using FaceDetector.Dtos;
 
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FaceDetector.Controllers
 {
+    // for admin role only
     [Route("api/[controller]")]
     [ApiController]
     [Authorize]
-    public class UserController : ControllerBase
+    public class AdminUserController : ControllerBase
     {
         private IUserService _userService;
 
         //Constructor
-        public UserController(IUserService userService)
+        public AdminUserController(IUserService userService)
         {
             _userService = userService;
         }

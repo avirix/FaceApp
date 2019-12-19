@@ -4,13 +4,13 @@ using FaceDetector.Abstractions.Repositories;
 using FaceDetector.Domain.Database.Repositories.Abstract;
 using FaceDetector.Domain.Models.Entities;
 using FaceDetector.Dtos;
-using FaceDetector.Services.Abstract;
+using FaceDetector.Services.Services.Abstract;
 
 namespace FaceDetector.Services.Services
 {
-    public class GalleryService : BaseModelService<Gallery, GalleryDto>, IGalleryService
+    public class FaceDetectedService : BaseModelService<FaceDetected, FaceDetectedDto>, IFaceDetectedService
     {
-        public GalleryService(IMapper mapper, IGalleryRepository tRepository)
+        public FaceDetectedService(IMapper mapper, IFaceDetectedRepository tRepository)
             : base(mapper, tRepository)
         {
         }
