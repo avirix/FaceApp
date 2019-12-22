@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 
 using FaceDetector.Abstractions.Services;
 using FaceDetector.Domain.Models.Request;
+using FaceDetector.Services.Abstract;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.CognitiveServices.Vision.Face.Models;

@@ -9,7 +9,7 @@ using FaceDetector.Abstractions.Repositories;
 using FaceDetector.Abstractions.Services;
 using FaceDetector.Domain.Models.Common;
 
-namespace FaceDetector.Services.Services
+namespace FaceDetector.Services.Concrete
 {
     public class BaseModelService<T, TDto> : IBaseModelService<T, TDto> where T : CommonModel<Guid>
     {

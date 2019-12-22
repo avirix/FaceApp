@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 using Microsoft.Azure.CognitiveServices.Vision.Face.Models;
 
-namespace FaceDetector.Abstractions.Services
+namespace FaceDetector.Services.Abstract
 {
     public interface IFaceService
     {

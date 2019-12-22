@@ -6,7 +6,8 @@ using FaceDetector.Domain.Database;
 using FaceDetector.Domain.Database.Repositories;
 using FaceDetector.Mappings;
 using FaceDetector.Middlewares;
-using FaceDetector.Services.Services;
+using FaceDetector.Services.Abstract;
+using FaceDetector.Services.Concrete;
 
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -46,7 +47,7 @@ namespace FaceDetector
             services.AddTransient(typeof(IBaseModelService<,>), typeof(BaseModelService<,>));
             services.AddTransient<IFaceService, FaceService>();
             services.AddTransient<IUserService, UserService>();
-            services.AddTransient<IGalleryService, GalleryService>();
+            services.AddTransient<IFolderService, FolderService>();
 
             services.AddTransient(typeof(IBaseRepository<>), typeof(BaseRepository<>));
             services.AddTransient<IUserRepository, UserRepository>();

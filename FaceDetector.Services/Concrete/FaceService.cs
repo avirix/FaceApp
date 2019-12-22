@@ -3,17 +3,15 @@ using System.Collections.Generic;
 using System.IO;
 using System.Net.Http;
 using System.Threading.Tasks;
-
-using FaceDetector.Abstractions.Services;
-
+using FaceDetector.Services.Abstract;
 using Microsoft.Azure.CognitiveServices.Vision.Face;
 using Microsoft.Azure.CognitiveServices.Vision.Face.Models;
 using Microsoft.Extensions.Configuration;
 
-namespace FaceDetector.Services.Services
+namespace FaceDetector.Services.Concrete
 {
-    public class FaceService : IFaceService 
-    { 
+    public class FaceService : IFaceService
+    {
         public IFaceClient FaceClient { get; set; }
 
         public FaceService(IConfiguration configuration)

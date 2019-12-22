@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace FaceDetector.Abstractions.Services
+namespace FaceDetector.Services.Abstract
 {
-    public interface IGalleryService
+    public interface IFolderService
     {
     }
 }

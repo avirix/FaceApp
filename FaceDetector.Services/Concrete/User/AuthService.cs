@@ -12,7 +12,7 @@ using FaceDetector.Services.Helpers;
 
 using Microsoft.IdentityModel.Tokens;
 
-namespace FaceDetector.Services.Services
+namespace FaceDetector.Services.Concrete
 {
     public partial class UserService
     {

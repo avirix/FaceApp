@@ -19,4 +19,8 @@
     <ProjectReference Include="..\FaceDetector.Abstractions\FaceDetector.Abstractions.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Database\Repositories\Concrete\" />
+  </ItemGroup>
+
 </Project>

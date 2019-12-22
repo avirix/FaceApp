@@ -10,7 +10,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Dtos\FaceDetector.Dtos.csproj" />
     <ProjectReference Include="..\FaceDetector.Dtos\FaceDetector.Dtos.csproj" />
   </ItemGroup>
 

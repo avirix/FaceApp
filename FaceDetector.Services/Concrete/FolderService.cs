@@ -1,0 +1,16 @@
+﻿using AutoMapper;
+
+using FaceDetector.Domain.Database.Repositories.Abstract;
+using FaceDetector.Domain.Models.Entities;
+using FaceDetector.Dtos;
+using FaceDetector.Services.Abstract;
+
+namespace FaceDetector.Services.Concrete
+{
+    public class FolderService : BaseModelService<ImageFolder, FolderDto>, IFolderService
+    {
+        public FolderService(IMapper mapper, IImageFolderRepository tRepository) : base(mapper, tRepository)
+        {
+        }
+    }
+}
