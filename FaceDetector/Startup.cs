@@ -66,7 +66,8 @@ namespace FaceDetector
                 options.SwaggerDoc("v1", new OpenApiInfo { Title = "FaceApp", Description = "FaceApp documentation" });
             });
 
-            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            services
+                .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
                 {
                     options.RequireHttpsMetadata = false;
@@ -92,7 +93,11 @@ namespace FaceDetector
             );
 
             services
-                .AddControllers(options => { options.AllowEmptyInputInBodyModelBinding = true; })
+                .AddControllers(options =>
+                {
+                    options.AllowEmptyInputInBodyModelBinding = true;
+                    options.EnableEndpointRouting = false;
+                })
                 .SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
         }
 
@@ -114,9 +119,7 @@ namespace FaceDetector
             app.UseDefaultFiles();
             app.UseStaticFiles();
 
-            app.UseAuthorization();
-
-            app.UseRouting();
+            app.UseApiResponse();
 
             // add swagger UI
             app.UseSwagger();
@@ -124,12 +127,8 @@ namespace FaceDetector
 
             app.UseCors("AllowAllPolicy");
 
-            app.UseApiResponse();
-
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
+            app.UseAuthentication();
+            app.UseMvc();
         }
     }
 }
