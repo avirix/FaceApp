@@ -1,7 +1,6 @@
-﻿using Dtos;
-
-using FaceDetector.Abstractions.Services;
+﻿using FaceDetector.Abstractions.Services;
 using FaceDetector.Domain.Models.Common;
+using FaceDetector.Dtos;
 
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

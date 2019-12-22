@@ -18,12 +18,13 @@ namespace FaceDetector.Domain.Models.Entities
         public int? PictureWidth { get; set; }
         public int? PictureHeight { get; set; }
         public string AnalyzeResult { get; set; }
+        public bool KeepPublic { get; set; }
         #endregion ImageData
 
         #region FK
         public Guid UserId { get; set; }
         public BaseUser User { get; set; }
-        public Guid FolderId { get; set; }
+        public Guid? FolderId { get; set; }
         public ImageFolder Folder { get; set; }
         #endregion FK
 

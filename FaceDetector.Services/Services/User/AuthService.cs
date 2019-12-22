@@ -5,10 +5,9 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 
-using Dtos;
-
 using FaceDetector.Abstractions.Entities;
 using FaceDetector.Domain.Models.Common;
+using FaceDetector.Dtos;
 using FaceDetector.Services.Helpers;
 
 using Microsoft.IdentityModel.Tokens;
