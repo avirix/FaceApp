@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using FaceDetector.Abstractions.Services;
+using FaceDetector.Domain.Models.Entities;
+using FaceDetector.Dtos;
 
 namespace FaceDetector.Services.Abstract
 {
-    public interface IFolderService
+    public interface IFolderService : IBaseModelOwnedService<ImageFolder, FolderDto>
     {
     }
 }

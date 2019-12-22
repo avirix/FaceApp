@@ -1,22 +1,29 @@
+using System;
+using System.Text;
+
 using AutoMapper;
 
 using FaceDetector.Abstractions.Repositories;
 using FaceDetector.Abstractions.Services;
 using FaceDetector.Domain.Database;
 using FaceDetector.Domain.Database.Repositories;
+using FaceDetector.Domain.Database.Repositories.Abstract;
+using FaceDetector.Domain.Database.Repositories.Concrete;
 using FaceDetector.Mappings;
 using FaceDetector.Middlewares;
 using FaceDetector.Services.Abstract;
 using FaceDetector.Services.Concrete;
+using FaceDetector.Services.Concrete.Base;
 
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 
 namespace FaceDetector
@@ -32,8 +39,6 @@ namespace FaceDetector
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-
             string connection = Configuration.GetConnectionString("SQLAzureConnectionString");
             if (connection.Contains("#"))
                 connection = Configuration.GetConnectionString("SQLLocalConnectionString");
@@ -43,19 +48,41 @@ namespace FaceDetector
 
             // add services to DI
             services.AddAutoMapper(typeof(MapperProfile));
+            services.AddHttpContextAccessor();
 
             services.AddTransient(typeof(IBaseModelService<,>), typeof(BaseModelService<,>));
+            services.AddTransient(typeof(IBaseModelOwnedService<,>), typeof(BaseModelOwnedService<,>));
             services.AddTransient<IFaceService, FaceService>();
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<IFolderService, FolderService>();
 
             services.AddTransient(typeof(IBaseRepository<>), typeof(BaseRepository<>));
             services.AddTransient<IUserRepository, UserRepository>();
+            services.AddTransient<IImageFolderRepository, ImageFolderRepository>();
+            services.AddTransient<IImagesRepository, ImagesRepository>();
 
             services.AddSwaggerGen(options =>
             {
                 options.SwaggerDoc("v1", new OpenApiInfo { Title = "FaceApp", Description = "FaceApp documentation" });
             });
+
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(options =>
+                {
+                    options.RequireHttpsMetadata = false;
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ClockSkew = TimeSpan.Zero,
+                        ValidateIssuer = true,
+                        ValidIssuer = Configuration["Auth:ISSUER"],
+                        ValidateAudience = true,
+                        ValidAudience = Configuration["Auth:AUDIENCE"],
+                        ValidateLifetime = true,
+                        RequireExpirationTime = true,
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Auth:KEY"])),
+                        ValidateIssuerSigningKey = true,
+                    };
+                });
 
             // handle CORS policies
             services.AddCors(
@@ -87,6 +114,8 @@ namespace FaceDetector
             app.UseDefaultFiles();
             app.UseStaticFiles();
 
+            app.UseAuthorization();
+
             app.UseRouting();
 
             // add swagger UI
@@ -96,8 +125,6 @@ namespace FaceDetector
             app.UseCors("AllowAllPolicy");
 
             app.UseApiResponse();
-
-            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

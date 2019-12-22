@@ -3,27 +3,38 @@ using System.Collections.Generic;
 using System.IO;
 using System.Net.Http;
 using System.Threading.Tasks;
+
+using AutoMapper;
+
+using FaceDetector.Domain.Database.Repositories.Abstract;
+using FaceDetector.Domain.Models.Entities;
+using FaceDetector.Dtos;
 using FaceDetector.Services.Abstract;
+using FaceDetector.Services.Concrete.Base;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Azure.CognitiveServices.Vision.Face;
 using Microsoft.Azure.CognitiveServices.Vision.Face.Models;
 using Microsoft.Extensions.Configuration;
 
 namespace FaceDetector.Services.Concrete
 {
-    public class FaceService : IFaceService
+    public class FaceService : BaseModelOwnedService<FaceAppImage, ImageDto>, IFaceService
     {
         public IFaceClient FaceClient { get; set; }
 
-        public FaceService(IConfiguration configuration)
+        public FaceService(IMapper mapper, IImagesRepository tRepository, IConfiguration configuration, IHttpContextAccessor contextAccessor)
+            : base(mapper, tRepository, contextAccessor)
         {
             var faceApiConfig = configuration.GetSection("FaceApi");
             FaceClient = new FaceClient(
                 new ApiKeyServiceClientCredentials(faceApiConfig["faceKey"]),
-                new DelegatingHandler[] { })
+
+            new DelegatingHandler[] { })
             {
                 Endpoint = faceApiConfig["faceEndpoint"]
             };
         }
+
 
         public async Task<IList<DetectedFace>> DetectFaces(string imageBase64)
         {

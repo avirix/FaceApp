@@ -6,9 +6,9 @@ using System.Security.Claims;
 using System.Text;
 
 using FaceDetector.Abstractions.Entities;
+using FaceDetector.Domain.Helpers;
 using FaceDetector.Domain.Models.Common;
 using FaceDetector.Dtos;
-using FaceDetector.Services.Helpers;
 
 using Microsoft.IdentityModel.Tokens;
 
@@ -62,6 +62,7 @@ namespace FaceDetector.Services.Concrete
         {
             var claims = new List<Claim>
             {
+                new Claim("UserId", user.Id.ToString()),
                 new Claim(ClaimTypes.Email, user.Email)
             };
             var claimsIdentity = new ClaimsIdentity(
