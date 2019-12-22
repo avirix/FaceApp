@@ -5,15 +5,14 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 
-using Dtos;
-
 using FaceDetector.Abstractions.Entities;
+using FaceDetector.Domain.Helpers;
 using FaceDetector.Domain.Models.Common;
-using FaceDetector.Services.Helpers;
+using FaceDetector.Dtos;
 
 using Microsoft.IdentityModel.Tokens;
 
-namespace FaceDetector.Services.Services
+namespace FaceDetector.Services.Concrete
 {
     public partial class UserService
     {
@@ -63,6 +62,7 @@ namespace FaceDetector.Services.Services
         {
             var claims = new List<Claim>
             {
+                new Claim("UserId", user.Id.ToString()),
                 new Claim(ClaimTypes.Email, user.Email)
             };
             var claimsIdentity = new ClaimsIdentity(

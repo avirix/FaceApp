@@ -15,6 +15,7 @@
   <ItemGroup>
     <ProjectReference Include="..\FaceDetector.Abstractions\FaceDetector.Abstractions.csproj" />
     <ProjectReference Include="..\FaceDetector.Domain\FaceDetector.Domain.csproj" />
+    <ProjectReference Include="..\FaceDetector.Dtos\FaceDetector.Dtos.csproj" />
   </ItemGroup>
 
 </Project>

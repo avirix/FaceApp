@@ -32,7 +32,7 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "faceappclient", "faceappcli
 		SlnRelativePath = "faceappclient\"
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FaceDetector.Dtos", "Dtos\FaceDetector.Dtos.csproj", "{8C726BA2-6BE7-4A01-94D4-6D5FCD66CCCB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FaceDetector.Dtos", "FaceDetector.Dtos\FaceDetector.Dtos.csproj", "{8C726BA2-6BE7-4A01-94D4-6D5FCD66CCCB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

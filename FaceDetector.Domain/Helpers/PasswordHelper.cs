@@ -1,9 +1,9 @@
-﻿using Microsoft.AspNetCore.Cryptography.KeyDerivation;
-using System;
+﻿using System;
 using System.Security.Cryptography;
 using System.Text;
+using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 
-namespace FaceDetector.Services.Helpers
+namespace FaceDetector.Domain.Helpers
 {
     public static class PasswordHelper
     {

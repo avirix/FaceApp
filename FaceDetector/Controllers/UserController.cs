@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 
-using Dtos;
-
 using FaceDetector.Abstractions.Services;
+using FaceDetector.Dtos;
 
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

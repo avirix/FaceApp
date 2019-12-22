@@ -30,7 +30,7 @@
   font-family: 'Audiowide', cursive;
 
 }
-.navbar > .logo {
+.navbar img.logo {
   width: 48px;
   margin-left: 10px;
   margin-right: 10px;
@@ -58,9 +58,25 @@
 body {
   background-image: url('./resources/img/bg.png');
   background-repeat: no-repeat;
-  background-size: inherit;
+  background-size: cover;
 }
 
 .jumbotron {
   background-color: #595c5f6b;
+}
+
+.imgPreview{
+  overflow: auto;
+}
+
+@media screen and (max-width: 868px) {
+  .navbar-nav li{
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+
+  .navbar-collapse form>input{
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
 }
